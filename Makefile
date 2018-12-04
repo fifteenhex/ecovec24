@@ -1,6 +1,6 @@
 .PHONY: buildroot buildroot_config clean
 
-BR2ARGS=BR2_DEFCONFIG=../br2external/board/ecovec24/buildroot.config BR2_EXTERNAL=../br2external
+BR2ARGS=BR2_DEFCONFIG=../br2external/board/ecovec24/buildroot.config BR2_EXTERNAL="../br2external ../br2autosshkey"
 
 buildroot:
 	$(MAKE) -C buildroot $(BR2ARGS)
