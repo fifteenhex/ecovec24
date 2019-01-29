@@ -1,1 +1,2 @@
 source "$BR2_EXTERNAL_ECOVEC24_PATH/package/tlwpy/Config.in"
+source "$BR2_EXTERNAL_ECOVEC24_PATH/package/tlwbe_heartbeat/Config.in"
