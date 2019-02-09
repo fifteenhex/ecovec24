@@ -1,0 +1,14 @@
+config BR2_PACKAGE_NODECTRL
+	bool "nodectrl"
+	select BR2_PACKAGE_GLIB_NETWORKING
+	select BR2_PACKAGE_HOST_PKGCONF
+	select BR2_PACKAGE_MOSQUITTO
+	select BR2_PACKAGE_JSON_GLIB
+
+config BR_PACKAGE_NODECTRL_MQTT_HOST
+	string "mqtt host"
+	depends on BR2_PACKAGE_NODECTRL
+
+config BR_PACKAGE_NODECTRL_NODENAME
+	string "node name"
+	depends on BR2_PACKAGE_NODECTRL

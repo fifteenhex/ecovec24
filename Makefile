@@ -16,6 +16,6 @@ linux_config:
 clean:
 	$(MAKE) -C buildroot $(BR2ARGS) clean
 
-upload:
-	scp buildroot/output/images/uImage espressobin2:/srv/tftp/ecovec.uImage
-	scp buildroot/output/images/rootfs.squashfs espressobin2:/srv/tftp/ecovec.initrd
+upload: buildroot
+	scp buildroot/output/images/uImage tftp:/srv/tftp/ecovec.uImage
+	scp buildroot/output/images/rootfs.squashfs tftp:/srv/tftp/ecovec.initrd
