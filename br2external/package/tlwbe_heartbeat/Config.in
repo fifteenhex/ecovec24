@@ -4,3 +4,27 @@ config BR2_PACKAGE_TLWBE_HEARTBEAT
 	select BR2_PACKAGE_PYTHON_DAEMONIZE
         help
           tlwbe heartbeat
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_MQTT_HOST
+        string "mqtt host"
+        depends on BR2_PACKAGE_TLWBE_HEARTBEAT
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_SERIAL_PORT
+	string "serial port"
+	depends on BR2_PACKAGE_TLWBE_HEARTBEAT
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_GATEWAY_ID
+	string "gateway id"
+	depends on BR2_PACKAGE_TLWBE_HEARTBEAT
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_APP_EUI
+        string "app eui"
+        depends on BR2_PACKAGE_TLWBE_HEARTBEAT
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_DEV_EUI
+        string "dev eui"
+        depends on BR2_PACKAGE_TLWBE_HEARTBEAT
+
+config BR2_PACKAGE_TLWBE_HEARTBEAT_DEV_KEY
+        string "dev key"
+        depends on BR2_PACKAGE_TLWBE_HEARTBEAT

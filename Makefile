@@ -1,4 +1,4 @@
-.PHONY: buildroot buildroot_config clean
+.PHONY: buildroot buildroot_config clean clearstuff shell
 
 BR2ARGS=BR2_DEFCONFIG=../br2external/board/ecovec24/buildroot.config BR2_EXTERNAL="../br2external ../br2autosshkey"
 
@@ -19,3 +19,10 @@ clean:
 upload: buildroot
 	scp buildroot/output/images/uImage tftp:/srv/tftp/ecovec.uImage
 	scp buildroot/output/images/rootfs.squashfs tftp:/srv/tftp/ecovec.initrd
+
+clearstuff:
+	rm -rf buildroot/output/build/nodectrl-dev/ buildroot/dl/nodectrl/
+	rm -rf buildroot/output/build/tlwbe_heartbeat-dev/ buildroot/dl/tlwbe_heartbeat/
+
+shell:
+	ssh -i buildroot/output/sshkeys/sh4life sh4life@ecovec24
