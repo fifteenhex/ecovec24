@@ -1,4 +1,4 @@
-.PHONY: buildroot buildroot_config clean clearstuff shell
+.PHONY: buildroot buildroot_config buildroot_defconfig clean clearstuff shell
 
 BR2ARGS=BR2_DEFCONFIG=../br2external/board/ecovec24/buildroot.config BR2_EXTERNAL="../br2external ../br2autosshkey"
 
@@ -8,6 +8,9 @@ buildroot:
 buildroot_config:
 	$(MAKE) -C buildroot $(BR2ARGS) menuconfig
 	$(MAKE) -C buildroot $(BR2ARGS) savedefconfig
+
+buildroot_defconfig:
+	$(MAKE) -C buildroot $(BR2ARGS) defconfig
 
 linux_config:
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-menuconfig
