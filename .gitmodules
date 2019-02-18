@@ -3,4 +3,4 @@
 	url = https://github.com/buildroot/buildroot.git
 [submodule "br2autosshkey"]
 	path = br2autosshkey
-	url = git@github.com:fifteenhex/br2autosshkey.git
+	url = https://github.com/fifteenhex/br2autosshkey.git
