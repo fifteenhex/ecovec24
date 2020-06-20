@@ -23,8 +23,15 @@ dldir:
 	mkdir -p $(DLDIR)
 
 buildroot_dl: dldir
+	- git -C $(DLDIR)/linux/git checkout master
+	- git -C $(DLDIR)/linux/git branch -D ecovec24
+	- git -C $(DLDIR)/linux/git fetch --all
+	- rm $(DLDIR)/linux/*.tar.gz
+
 	$(MAKE) -C buildroot $(BR2ARGS) defconfig
 	$(MAKE) -C buildroot $(BR2ARGS) source
+
+	ls -l $(DLDIR)/linux/
 
 buildroot: dldir
 	$(MAKE) -C buildroot $(BR2ARGS)
