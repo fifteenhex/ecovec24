@@ -47,7 +47,19 @@ linux_config:
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-menuconfig
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-update-defconfig
 
+define update_git_package
+        @echo updating git package $(1)
+        git -C dl/$(1)/git clean -fd
+        git -C dl/$(1)/git fetch --force --all --tags
+        git -C dl/$(1)/git checkout master
+        - git -C dl/$(1)/git branch -D $(2)
+        git -C dl/$(1)/git checkout -b $(2)
+        git -C dl/$(1)/git reset --hard origin/$(2)
+        rm -f dl/$(1)/$(1)-$(2).tar.gz
+endef
+
 linux_rebuild:
+	$(call update_git_package,linux,ecovec24)
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-rebuild
 
 clean:
