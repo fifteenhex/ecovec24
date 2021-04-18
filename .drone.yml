@@ -63,6 +63,19 @@ steps:
   commands:
   - make buildroot-toolchain
 
+- name: publish
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: deploy_key
+    files:
+      - outputs/*
+    checksum:
+      - sha256
+      - sha512
+  when:
+    event: tag
+
 volumes:
   - name: cache
     host: 

@@ -11,7 +11,7 @@ DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 	shell \
 	bootstrap
 
-all: buildroot
+all: buildroot copy_outputs
 
 bootstrap:
 	git submodule init
@@ -20,14 +20,6 @@ bootstrap:
 ./br2secretsauce/common.mk: bootstrap
 
 include ./br2secretsauce/common.mk
-
-buildroot_config:
-	$(MAKE) -C buildroot $(BR2ARGS) menuconfig
-	$(MAKE) -C buildroot $(BR2ARGS) savedefconfig
-
-linux_config:
-	$(MAKE) -C buildroot/ $(BR2ARGS) linux-menuconfig
-	$(MAKE) -C buildroot/ $(BR2ARGS) linux-update-defconfig
 
 define update_git_package
         @echo updating git package $(1)
@@ -58,3 +50,7 @@ clearstuff:
 shell:
 	ssh-keygen -f "/home/daniel/.ssh/known_hosts" -R "ecovec24"
 	ssh -i buildroot/output/sshkeys/sh4life sh4life@ecovec24
+
+copy_outputs:
+	cp buildroot/output/images/uImage $(OUTPUTS)/ecovec24-u-boot.img
+	cp buildroot/output/images/rootfs.squashfs $(OUTPUTS)/ecovec24-rootfs.squashfs
