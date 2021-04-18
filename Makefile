@@ -1,11 +1,9 @@
 DLDIR=$(PWD)/dl
 
-BR2ARGS=BR2_DEFCONFIG=../br2external/board/ecovec24/buildroot.config \
-	BR2_EXTERNAL="../br2external ../br2autosshkey" \
-	BR2_DL_DIR=$(DLDIR)
+EXTERNALS=../br2external ../br2autosshkey
+DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 
-.PHONY: dldir \
-	buildroot \
+.PHONY: buildroot \
 	buildroot_config \
 	buildroot_defconfig \
 	clean \
@@ -19,29 +17,13 @@ bootstrap:
 	git submodule init
 	git submodule update
 
-dldir:
-	mkdir -p $(DLDIR)
+./br2secretsauce/common.mk: bootstrap
 
-buildroot_dl: dldir
-	- git -C $(DLDIR)/linux/git checkout master
-	- git -C $(DLDIR)/linux/git branch -D ecovec24
-	- git -C $(DLDIR)/linux/git fetch --all
-	- rm $(DLDIR)/linux/*.tar.gz
-
-	$(MAKE) -C buildroot $(BR2ARGS) defconfig
-	$(MAKE) -C buildroot $(BR2ARGS) source
-
-	ls -l $(DLDIR)/linux/
-
-buildroot: dldir
-	$(MAKE) -C buildroot $(BR2ARGS)
+include ./br2secretsauce/common.mk
 
 buildroot_config:
 	$(MAKE) -C buildroot $(BR2ARGS) menuconfig
 	$(MAKE) -C buildroot $(BR2ARGS) savedefconfig
-
-buildroot_defconfig:
-	$(MAKE) -C buildroot $(BR2ARGS) defconfig
 
 linux_config:
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-menuconfig

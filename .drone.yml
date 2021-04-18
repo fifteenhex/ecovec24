@@ -39,7 +39,7 @@ steps:
   image: ecovec_buildroot
   pull: if-not-exists
   commands:
-  - make buildroot_dl
+  - make buildroot-dl
 
 - name: rebuild-cache
   image: drillster/drone-volume-cache
@@ -56,6 +56,12 @@ steps:
   pull: if-not-exists
   commands:
   - make
+
+- name: toolchain
+  image: ecovec_buildroot
+  pull: if-not-exists
+  commands:
+  - make buildroot-toolchain
 
 volumes:
   - name: cache
