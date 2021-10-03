@@ -33,7 +33,7 @@ define update_git_package
 endef
 
 linux_rebuild:
-	$(call update_git_package,linux,ecovec24)
+#	$(call update_git_package,linux,ecovec24)
 	$(MAKE) -C buildroot/ $(BR2ARGS) linux-rebuild
 
 clean:
