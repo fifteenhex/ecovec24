@@ -1,11 +1,10 @@
+PREFIX=ecovec24
+TOOLCHAIN=sh4-buildroot-linux-gnu_sdk-buildroot.tar.gz
 DLDIR=$(PWD)/dl
-
 EXTERNALS=../br2external ../br2autosshkey
 DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 
 .PHONY: buildroot \
-	buildroot_config \
-	buildroot_defconfig \
 	clean \
 	clearstuff \
 	shell \
@@ -13,11 +12,12 @@ DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 
 all: buildroot copy_outputs
 
-bootstrap:
+bootstrap.stamp:
 	git submodule init
 	git submodule update
+	touch bootstrap.stamp
 
-./br2secretsauce/common.mk: bootstrap
+./br2secretsauce/common.mk: bootstrap.stamp
 
 include ./br2secretsauce/common.mk
 
