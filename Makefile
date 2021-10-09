@@ -10,7 +10,7 @@ DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 	shell \
 	bootstrap
 
-all: buildroot copy_outputs
+all: buildroot copy_outputs upload
 
 bootstrap.stamp:
 	git submodule init
@@ -28,10 +28,6 @@ linux_rebuild:
 clean:
 	$(MAKE) -C buildroot $(BR2ARGS) clean
 
-upload: buildroot
-	scp buildroot/output/images/uImage tftp:/srv/tftp/ecovec.uImage
-	scp buildroot/output/images/rootfs.squashfs tftp:/srv/tftp/ecovec.initrd
-
 clearstuff:
 	rm -rf buildroot/output/build/nodectrl-dev/ buildroot/dl/nodectrl/
 	rm -rf buildroot/output/build/tlwbe_heartbeat-dev/ buildroot/dl/tlwbe_heartbeat/
@@ -43,3 +39,6 @@ shell:
 copy_outputs:
 	cp buildroot/output/images/uImage $(OUTPUTS)/ecovec24-u-boot.img
 	cp buildroot/output/images/rootfs.squashfs $(OUTPUTS)/ecovec24-rootfs.squashfs
+
+upload:
+	$(call upload_to_tftp,$(BUILDROOT_PATH)/output/images/uImage)
