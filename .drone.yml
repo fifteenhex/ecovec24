@@ -29,6 +29,15 @@ steps:
   - docker build -t ecovec_buildroot .
   - chmod -R o+rw ./
 
+- name: secrets
+  image: ecovec_buildroot
+  pull: if-not-exists
+  environment:
+    SSH_KEY:
+      from_secret: tftp_ssh_key
+  commands:
+    - mkdir ./secrets/ && echo "$SSH_KEY" > ./secrets/tftp_ssh_key && chmod 0600 ./secrets/tftp_ssh_key
+
 - name: bootstrap
   image: ecovec_buildroot
   pull: if-not-exists

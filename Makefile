@@ -41,4 +41,4 @@ copy_outputs:
 	cp buildroot/output/images/rootfs.squashfs $(OUTPUTS)/ecovec24-rootfs.squashfs
 
 upload:
-	$(call upload_to_tftp,$(BUILDROOT_PATH)/output/images/uImage)
+	$(call upload_to_tftp_with_scp,$(BUILDROOT_PATH)/output/images/uImage)
