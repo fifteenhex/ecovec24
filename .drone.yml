@@ -96,7 +96,7 @@ steps:
 volumes:
   - name: cache
     host: 
-      path: /tmp/ecovec_buildroot_cache
+      path: /var/lib/drone/cache
   - name: docker_sock
     host:
       path: /var/run/docker.sock
