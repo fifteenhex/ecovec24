@@ -15,6 +15,7 @@ steps:
     backend: "filesystem"
     restore: true
     cache_key: "volume"
+    filesystem_cache_root: "/var/lib/drone/cache"
     mount:
       - 'dl'
   volumes:
@@ -60,6 +61,7 @@ steps:
     backend: "filesystem"
     rebuild: true
     cache_key: "volume"
+    filesystem_cache_root: "/var/lib/drone/cache"
     mount:
       - 'dl'
   volumes:
