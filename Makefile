@@ -1,6 +1,5 @@
 PREFIX=ecovec24
 TOOLCHAIN=sh4-buildroot-linux-gnu_sdk-buildroot.tar.gz
-DLDIR=$(PWD)/dl
 EXTERNALS=../br2external ../br2autosshkey
 DEFCONFIG=../br2external/board/ecovec24/buildroot.config
 
